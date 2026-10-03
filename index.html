@@ -1,1 +1,4451 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NUSUK HOTEL BOOKING - نظام إدارة النشر</title>
+
+<meta name="theme-color" content="#94151d">
+<meta name="description" content="نظام إدارة منشورات NUSUK HOTEL BOOKING">
+
+<style>
+
+:root{
+    --red:#94151d;
+    --red2:#b21c27;
+    --gold:#c8a35b;
+    --dark:#171717;
+    --dark2:#222;
+    --bg:#f4f4f4;
+    --white:#fff;
+    --gray:#777;
+    --green:#198754;
+    --blue:#1769aa;
+    --orange:#e68a00;
+    --danger:#c62828;
+    --border:#e5e5e5;
+    --shadow:0 5px 20px rgba(0,0,0,.08);
+    --radius:16px;
+}
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+    background:var(--bg);
+    color:#222;
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:linear-gradient(135deg,var(--red),#741019);
+    color:white;
+    box-shadow:0 3px 15px rgba(0,0,0,.18);
+}
+
+.header-inner{
+    max-width:1250px;
+    margin:auto;
+    padding:12px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.brand-logo{
+    width:48px;
+    height:48px;
+    border-radius:12px;
+    object-fit:cover;
+    background:white;
+}
+
+.brand-text strong{
+    display:block;
+    font-size:17px;
+}
+
+.brand-text span{
+    font-size:11px;
+    opacity:.8;
+}
+
+.menu-btn{
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.2);
+    color:#fff;
+    border-radius:10px;
+    padding:10px 13px;
+    font-size:20px;
+}
+
+.nav{
+    max-width:1250px;
+    margin:auto;
+    padding:0 12px 10px;
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+}
+
+.nav button{
+    flex:0 0 auto;
+    border:0;
+    background:rgba(255,255,255,.1);
+    color:#fff;
+    padding:9px 13px;
+    border-radius:10px;
+    font-size:13px;
+}
+
+.nav button.active,
+.nav button:hover{
+    background:#fff;
+    color:var(--red);
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:18px 14px 90px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-title{
+    margin-bottom:18px;
+}
+
+.page-title h1{
+    margin:0 0 5px;
+    font-size:25px;
+}
+
+.page-title p{
+    margin:0;
+    color:var(--gray);
+    font-size:13px;
+}
+
+/* ================= CARDS ================= */
+
+.card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:18px;
+    margin-bottom:16px;
+}
+
+.card-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.card-title h2,
+.card-title h3{
+    margin:0;
+}
+
+.card-title h2{
+    font-size:18px;
+}
+
+.card-title h3{
+    font-size:15px;
+}
+
+/* ================= DASHBOARD ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.stat{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:17px;
+    box-shadow:var(--shadow);
+}
+
+.stat .icon{
+    font-size:24px;
+}
+
+.stat strong{
+    display:block;
+    font-size:25px;
+    margin-top:8px;
+}
+
+.stat span{
+    color:var(--gray);
+    font-size:12px;
+}
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.quick{
+    border:0;
+    border-radius:15px;
+    background:#fff;
+    box-shadow:var(--shadow);
+    padding:20px 12px;
+    text-align:center;
+    font-size:14px;
+}
+
+.quick .qicon{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.quick:hover{
+    transform:translateY(-2px);
+}
+
+/* ================= FORMS ================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:13px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-size:13px;
+    font-weight:bold;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    border:1px solid #d9d9d9;
+    border-radius:10px;
+    padding:11px 12px;
+    outline:none;
+    background:#fff;
+    font-size:14px;
+}
+
+textarea{
+    min-height:180px;
+    resize:vertical;
+    line-height:1.8;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:var(--red);
+    box-shadow:0 0 0 3px rgba(148,21,29,.08);
+}
+
+.btn-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:14px;
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:11px 15px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.btn-primary{
+    background:var(--red);
+    color:#fff;
+}
+
+.btn-primary:hover{
+    background:var(--red2);
+}
+
+.btn-gold{
+    background:var(--gold);
+    color:#fff;
+}
+
+.btn-green{
+    background:var(--green);
+    color:#fff;
+}
+
+.btn-blue{
+    background:var(--blue);
+    color:#fff;
+}
+
+.btn-danger{
+    background:var(--danger);
+    color:#fff;
+}
+
+.btn-light{
+    background:#eee;
+    color:#333;
+}
+
+.btn-dark{
+    background:#222;
+    color:#fff;
+}
+
+/* ================= HOTEL GRID ================= */
+
+.hotel-toolbar{
+    display:grid;
+    grid-template-columns:2fr repeat(3,1fr);
+    gap:9px;
+    margin-bottom:15px;
+}
+
+.hotel-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+}
+
+.hotel-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:17px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    position:relative;
+}
+
+.hotel-image{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    display:block;
+    background:#ddd;
+}
+
+.hotel-body{
+    padding:14px;
+}
+
+.hotel-name{
+    font-size:17px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.hotel-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+    margin-bottom:10px;
+}
+
+.badge{
+    background:#f1f1f1;
+    border-radius:20px;
+    padding:5px 8px;
+    font-size:11px;
+}
+
+.badge.red{
+    background:#fae5e7;
+    color:var(--red);
+}
+
+.badge.gold{
+    background:#f7efd9;
+    color:#856b2d;
+}
+
+.hotel-features{
+    color:#555;
+    font-size:12px;
+    line-height:1.8;
+    min-height:55px;
+}
+
+.hotel-actions{
+    display:flex;
+    gap:6px;
+    margin-top:10px;
+}
+
+.hotel-actions button{
+    flex:1;
+}
+
+/* ================= POST GENERATOR ================= */
+
+.selection-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.select-mode{
+    border:2px solid #eee;
+    border-radius:13px;
+    padding:13px;
+    background:#fff;
+    text-align:center;
+    cursor:pointer;
+}
+
+.select-mode.active{
+    border-color:var(--red);
+    background:#fff7f7;
+}
+
+.select-mode strong{
+    display:block;
+    color:var(--red);
+    margin-bottom:4px;
+}
+
+.selected-hotels{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:15px;
+}
+
+.selected-item{
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:10px;
+    background:#fafafa;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.selected-item img{
+    width:55px;
+    height:55px;
+    border-radius:9px;
+    object-fit:cover;
+}
+
+.selected-item strong{
+    font-size:12px;
+}
+
+.post-box{
+    background:#171717;
+    color:#fff;
+    border-radius:14px;
+    padding:15px;
+    white-space:pre-wrap;
+    line-height:1.9;
+    min-height:220px;
+    font-size:14px;
+    direction:rtl;
+    text-align:right;
+}
+
+/* ================= GROUPS ================= */
+
+.group-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.group-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:15px;
+    box-shadow:var(--shadow);
+}
+
+.group-card h3{
+    margin:0 0 7px;
+    font-size:15px;
+}
+
+.group-url{
+    color:var(--gray);
+    font-size:11px;
+    word-break:break-all;
+}
+
+/* ================= HISTORY ================= */
+
+.history-item{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:15px;
+    margin-bottom:10px;
+}
+
+.history-head{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:8px;
+}
+
+.history-date{
+    color:var(--gray);
+    font-size:11px;
+}
+
+.history-preview{
+    background:#f6f6f6;
+    padding:10px;
+    border-radius:10px;
+    white-space:pre-wrap;
+    line-height:1.7;
+    font-size:12px;
+    max-height:150px;
+    overflow:hidden;
+}
+
+/* ================= SETTINGS ================= */
+
+.setting-list{
+    display:grid;
+    gap:12px;
+}
+
+.setting-row{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:12px;
+    align-items:center;
+}
+
+.switch-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.switch-row input{
+    width:auto;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:5000;
+    background:rgba(0,0,0,.65);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    background:#fff;
+    width:min(700px,100%);
+    max-height:90vh;
+    overflow:auto;
+    border-radius:18px;
+    padding:18px;
+}
+
+.modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.close{
+    border:0;
+    background:#eee;
+    border-radius:50%;
+    width:35px;
+    height:35px;
+    font-size:18px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%) translateY(100px);
+    background:#222;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:12px;
+    z-index:9000;
+    opacity:0;
+    transition:.3s;
+    font-size:13px;
+    max-width:90%;
+    text-align:center;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .quick-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hotel-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .selected-hotels{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hotel-toolbar{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .header-inner{
+        padding:10px 12px;
+    }
+
+    .container{
+        padding:14px 10px 80px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+        gap:8px;
+    }
+
+    .stat{
+        padding:13px;
+    }
+
+    .stat strong{
+        font-size:21px;
+    }
+
+    .quick-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:8px;
+    }
+
+    .quick{
+        padding:15px 8px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .hotel-toolbar{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .hotel-toolbar input{
+        grid-column:1/-1;
+    }
+
+    .hotel-grid{
+        grid-template-columns:1fr;
+    }
+
+    .selection-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .selected-hotels{
+        grid-template-columns:1fr;
+    }
+
+    .group-grid{
+        grid-template-columns:1fr;
+    }
+
+    .setting-row{
+        grid-template-columns:1fr;
+    }
+
+    .page-title h1{
+        font-size:21px;
+    }
+
+    .hotel-image{
+        height:210px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div class="brand">
+
+            <div
+                class="brand-logo"
+                style="
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                color:#94151d;
+                font-weight:bold;
+                background:#fff;
+                "
+            >
+                N
+            </div>
+
+            <div class="brand-text">
+
+                <strong>NUSUK HOTEL BOOKING</strong>
+
+                <span>
+                    نظام إدارة المنشورات
+                </span>
+
+            </div>
+
+        </div>
+
+        <button
+            class="menu-btn"
+            onclick="go('home')"
+        >
+            ☰
+        </button>
+
+    </div>
+
+    <nav class="nav">
+
+        <button
+            data-page="home"
+            class="active"
+            onclick="go('home')"
+        >
+            الرئيسية
+        </button>
+
+        <button
+            data-page="post"
+            onclick="go('post')"
+        >
+            إنشاء منشور
+        </button>
+
+        <button
+            data-page="hotels"
+            onclick="go('hotels')"
+        >
+            الفنادق
+        </button>
+
+        <button
+            data-page="groups"
+            onclick="go('groups')"
+        >
+            الجروبات
+        </button>
+
+        <button
+            data-page="history"
+            onclick="go('history')"
+        >
+            السجل
+        </button>
+
+        <button
+            data-page="settings"
+            onclick="go('settings')"
+        >
+            الإعدادات
+        </button>
+
+    </nav>
+
+</header>
+
+<main class="container">
+
+<!-- ========================================================= -->
+<!-- HOME -->
+<!-- ========================================================= -->
+
+<section
+    id="page-home"
+    class="page active"
+>
+
+    <div class="page-title">
+
+        <h1>
+            لوحة التحكم
+        </h1>
+
+        <p>
+            إدارة فنادقك ومنشوراتك وجروبات فيسبوك من مكان واحد
+        </p>
+
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="icon">🏨</div>
+
+            <strong id="statHotels">
+                18
+            </strong>
+
+            <span>
+                إجمالي الفنادق
+            </span>
+
+        </div>
+
+        <div class="stat">
+
+            <div class="icon">👥</div>
+
+            <strong id="statGroups">
+                0
+            </strong>
+
+            <span>
+                الجروبات
+            </span>
+
+        </div>
+
+        <div class="stat">
+
+            <div class="icon">📝</div>
+
+            <strong id="statPosts">
+                0
+            </strong>
+
+            <span>
+                المنشورات
+            </span>
+
+        </div>
+
+        <div class="stat">
+
+            <div class="icon">📊</div>
+
+            <strong id="statUsed">
+                0
+            </strong>
+
+            <span>
+                فنادق تم استخدامها
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                إجراءات سريعة
+            </h2>
+
+        </div>
+
+        <div class="quick-grid">
+
+            <button
+                class="quick"
+                onclick="go('post')"
+            >
+
+                <div class="qicon">
+                    📝
+                </div>
+
+                إنشاء منشور
+
+            </button>
+
+
+            <button
+                class="quick"
+                onclick="go('hotels')"
+            >
+
+                <div class="qicon">
+                    🏨
+                </div>
+
+                إدارة الفنادق
+
+            </button>
+
+
+            <button
+                class="quick"
+                onclick="go('groups')"
+            >
+
+                <div class="qicon">
+                    👥
+                </div>
+
+                إدارة الجروبات
+
+            </button>
+
+
+            <button
+                class="quick"
+                onclick="go('history')"
+            >
+
+                <div class="qicon">
+                    📋
+                </div>
+
+                سجل المنشورات
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                طريقة الاستخدام
+            </h2>
+
+        </div>
+
+        <div style="line-height:2;font-size:14px">
+
+            <p>
+                <b>1.</b>
+                ادخل على إنشاء منشور.
+            </p>
+
+            <p>
+                <b>2.</b>
+                اختر عدد الفنادق: 1 أو 3 أو 4 أو 5 أو 6 أو الكل.
+            </p>
+
+            <p>
+                <b>3.</b>
+                اختر طريقة الاختيار: ذكي، متقارب، سعر، قرب الحرم أو نجوم.
+            </p>
+
+            <p>
+                <b>4.</b>
+                النظام ينشئ الإعلان تلقائياً.
+            </p>
+
+            <p>
+                <b>5.</b>
+                انسخ الإعلان وافتح الجروب الذي تريد النشر فيه.
+            </p>
+
+            <p>
+                <b>6.</b>
+                بعد النشر احفظه في السجل حتى يتم حساب تكرار الفنادق.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- POST -->
+<!-- ========================================================= -->
+
+<section
+    id="page-post"
+    class="page"
+>
+
+    <div class="page-title">
+
+        <h1>
+            إنشاء منشور
+        </h1>
+
+        <p>
+            اختر الفنادق وسيتم تكوين الإعلان تلقائياً
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                1 - عدد الفنادق
+            </h2>
+
+        </div>
+
+
+        <div class="selection-grid">
+
+            <div
+                class="select-mode"
+                data-count="1"
+                onclick="setCount(1)"
+            >
+                <strong>1</strong>
+                فندق واحد
+            </div>
+
+            <div
+                class="select-mode"
+                data-count="3"
+                onclick="setCount(3)"
+            >
+                <strong>3</strong>
+                فنادق
+            </div>
+
+            <div
+                class="select-mode"
+                data-count="4"
+                onclick="setCount(4)"
+            >
+                <strong>4</strong>
+                فنادق
+            </div>
+
+            <div
+                class="select-mode"
+                data-count="5"
+                onclick="setCount(5)"
+            >
+                <strong>5</strong>
+                فنادق
+            </div>
+
+            <div
+                class="select-mode"
+                data-count="6"
+                onclick="setCount(6)"
+            >
+                <strong>6</strong>
+                فنادق
+            </div>
+
+            <div
+                class="select-mode"
+                data-count="18"
+                onclick="setCount(18)"
+            >
+                <strong>18</strong>
+                كل الفنادق
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                2 - طريقة اختيار الفنادق
+            </h2>
+
+        </div>
+
+
+        <div class="selection-grid">
+
+            <div
+                class="select-mode active"
+                data-method="smart"
+                onclick="setMethod('smart')"
+            >
+
+                <strong>
+                    🧠 ذكي
+                </strong>
+
+                تنويع + قرب + نجوم
+
+            </div>
+
+
+            <div
+                class="select-mode"
+                data-method="similar"
+                onclick="setMethod('similar')"
+            >
+
+                <strong>
+                    🔗 متقاربة
+                </strong>
+
+                فنادق متقاربة في المستوى
+
+            </div>
+
+
+            <div
+                class="select-mode"
+                data-method="price"
+                onclick="setMethod('price')"
+            >
+
+                <strong>
+                    💰 السعر
+                </strong>
+
+                حسب الفئة السعرية
+
+            </div>
+
+
+            <div
+                class="select-mode"
+                data-method="near"
+                onclick="setMethod('near')"
+            >
+
+                <strong>
+                    🕋 الحرم
+                </strong>
+
+                الأقرب للحرم
+
+            </div>
+
+
+            <div
+                class="select-mode"
+                data-method="stars"
+                onclick="setMethod('stars')"
+            >
+
+                <strong>
+                    ⭐ النجوم
+                </strong>
+
+                حسب التصنيف
+
+            </div>
+
+
+            <div
+                class="select-mode"
+                data-method="single"
+                onclick="setMethod('single')"
+            >
+
+                <strong>
+                    🎯 يدوي
+                </strong>
+
+                اختيار عشوائي متنوع
+
+            </div>
+
+        </div>
+
+
+        <div class="btn-row">
+
+            <button
+                class="btn btn-primary"
+                onclick="generateHotels()"
+            >
+                🔄 اختيار الفنادق
+            </button>
+
+            <button
+                class="btn btn-light"
+                onclick="clearSelected()"
+            >
+                مسح
+            </button>
+
+        </div>
+
+
+        <div
+            id="selectedHotels"
+            class="selected-hotels"
+        ></div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                3 - شكل الإعلان
+            </h2>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>
+                    قالب الإعلان
+                </label>
+
+                <select id="template">
+
+                    <option value="fancy">
+                        الإعلان الرايق
+                    </option>
+
+                    <option value="groups">
+                        إعلان الجروبات
+                    </option>
+
+                    <option value="short">
+                        إعلان مختصر
+                    </option>
+
+                    <option value="custom">
+                        قالب مخصص
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    عنوان الإعلان
+                </label>
+
+                <input
+                    id="postTitle"
+                    value="🏨 عروض فنادق مكة المكرمة"
+                >
+
+            </div>
+
+
+            <div
+                class="form-group full"
+            >
+
+                <label>
+                    نص إضافي
+                </label>
+
+                <input
+                    id="extraText"
+                    placeholder="مثلاً: متاح حجز عائلات - أسعار مميزة..."
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="btn-row">
+
+            <button
+                class="btn btn-primary"
+                onclick="createPost()"
+            >
+                ✨ إنشاء الإعلان
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="postResultCard"
+        class="card hidden"
+    >
+
+        <div class="card-title">
+
+            <h2>
+                الإعلان جاهز
+            </h2>
+
+        </div>
+
+
+        <div
+            id="postResult"
+            class="post-box"
+        ></div>
+
+
+        <div class="btn-row">
+
+            <button
+                class="btn btn-green"
+                onclick="copyPost()"
+            >
+                📋 نسخ الإعلان
+            </button>
+
+            <button
+                class="btn btn-blue"
+                onclick="savePost()"
+            >
+                💾 حفظ في السجل
+            </button>
+
+            <button
+                class="btn btn-primary"
+                onclick="go('groups')"
+            >
+                👥 الذهاب للجروبات
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- HOTELS -->
+<!-- ========================================================= -->
+
+<section
+    id="page-hotels"
+    class="page"
+>
+
+    <div class="page-title">
+
+        <h1>
+            الفنادق
+        </h1>
+
+        <p>
+            جميع الفنادق الـ18 مع الصورة المرتبطة بها
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="hotel-toolbar">
+
+            <input
+                id="hotelSearch"
+                placeholder="🔎 ابحث عن فندق..."
+                oninput="renderHotels()"
+            >
+
+            <select
+                id="starFilter"
+                onchange="renderHotels()"
+            >
+
+                <option value="all">
+                    كل النجوم
+                </option>
+
+                <option value="5">
+                    ⭐⭐⭐⭐⭐
+                </option>
+
+                <option value="4">
+                    ⭐⭐⭐⭐
+                </option>
+
+                <option value="3">
+                    ⭐⭐⭐
+                </option>
+
+            </select>
+
+
+            <select
+                id="areaFilter"
+                onchange="renderHotels()"
+            >
+
+                <option value="all">
+                    كل المناطق
+                </option>
+
+                <option value="التيسير">
+                    التيسير
+                </option>
+
+                <option value="أجياد">
+                    أجياد
+                </option>
+
+                <option value="إبراهيم الخليل">
+                    إبراهيم الخليل
+                </option>
+
+                <option value="العزيزية">
+                    العزيزية
+                </option>
+
+            </select>
+
+
+            <select
+                id="sortHotels"
+                onchange="renderHotels()"
+            >
+
+                <option value="default">
+                    الترتيب الافتراضي
+                </option>
+
+                <option value="distance">
+                    الأقرب للحرم
+                </option>
+
+                <option value="stars">
+                    الأعلى تصنيفاً
+                </option>
+
+                <option value="used">
+                    الأقل استخداماً
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            id="hotelGrid"
+            class="hotel-grid"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- GROUPS -->
+<!-- ========================================================= -->
+
+<section
+    id="page-groups"
+    class="page"
+>
+
+    <div class="page-title">
+
+        <h1>
+            جروبات فيسبوك
+        </h1>
+
+        <p>
+            احفظ روابط الجروبات وافتحها بسرعة بعد تجهيز الإعلان
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                إضافة جروب
+            </h2>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>
+                    اسم الجروب
+                </label>
+
+                <input
+                    id="groupName"
+                    placeholder="مثلاً: حج وعمرة مصر"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    رابط الجروب
+                </label>
+
+                <input
+                    id="groupUrl"
+                    placeholder="https://www.facebook.com/groups/..."
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="btn-row">
+
+            <button
+                class="btn btn-primary"
+                onclick="addGroup()"
+            >
+                ➕ إضافة الجروب
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="groupGrid"
+        class="group-grid"
+    ></div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- HISTORY -->
+<!-- ========================================================= -->
+
+<section
+    id="page-history"
+    class="page"
+>
+
+    <div class="page-title">
+
+        <h1>
+            سجل المنشورات
+        </h1>
+
+        <p>
+            سجل الإعلانات التي تم تجهيزها وحفظها
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="btn-row">
+
+            <button
+                class="btn btn-danger"
+                onclick="clearHistory()"
+            >
+                🗑️ مسح السجل
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div id="historyList"></div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- SETTINGS -->
+<!-- ========================================================= -->
+
+<section
+    id="page-settings"
+    class="page"
+>
+
+    <div class="page-title">
+
+        <h1>
+            الإعدادات
+        </h1>
+
+        <p>
+            بيانات NUSUK HOTEL BOOKING
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                بيانات الإعلان
+            </h2>
+
+        </div>
+
+
+        <div class="setting-list">
+
+            <div class="setting-row">
+
+                <label>
+                    الاسم
+                </label>
+
+                <input
+                    id="setName"
+                >
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <label>
+                    رقم الهاتف
+                </label>
+
+                <input
+                    id="setPhone"
+                >
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <label>
+                    اسم الشركة
+                </label>
+
+                <input
+                    id="setBrand"
+                >
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <label>
+                    رابط واتساب
+                </label>
+
+                <input
+                    id="setWhatsapp"
+                >
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <label>
+                    منع تكرار الفندق
+                </label>
+
+                <input
+                    id="setRepeat"
+                    type="number"
+                    min="0"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="btn-row">
+
+            <button
+                class="btn btn-primary"
+                onclick="saveSettings()"
+            >
+                💾 حفظ الإعدادات
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                النسخ الاحتياطي
+            </h2>
+
+        </div>
+
+
+        <p style="font-size:13px;color:#666">
+            احفظ بيانات الفنادق والجروبات والسجل في ملف JSON.
+        </p>
+
+
+        <div class="btn-row">
+
+            <button
+                class="btn btn-blue"
+                onclick="backupData()"
+            >
+                ⬇️ تحميل نسخة احتياطية
+            </button>
+
+
+            <button
+                class="btn btn-green"
+                onclick="document.getElementById('restoreFile').click()"
+            >
+                ⬆️ استرجاع نسخة
+            </button>
+
+            <input
+                id="restoreFile"
+                type="file"
+                accept=".json"
+                hidden
+                onchange="restoreData(event)"
+            >
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                إعادة ضبط
+            </h2>
+
+        </div>
+
+        <button
+            class="btn btn-danger"
+            onclick="resetSystem()"
+        >
+            ⚠️ إعادة النظام للوضع الافتراضي
+        </button>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ========================================================= -->
+<!-- MODAL -->
+<!-- ========================================================= -->
+
+<div
+    id="modal"
+    class="modal"
+    onclick="closeModal(event)"
+>
+
+    <div
+        class="modal-box"
+        onclick="event.stopPropagation()"
+    >
+
+        <div class="modal-head">
+
+            <h2 id="modalTitle">
+                تفاصيل الفندق
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<script>
+
+/* =========================================================
+   SYSTEM DATA
+========================================================= */
+
+const STORAGE_KEY = "NUSUK_WORK_SYSTEM_V4";
+
+
+const DEFAULT_SETTINGS = {
+
+    name:"mohammed kassem",
+
+    phone:"01032321748",
+
+    brand:"NUSUK HOTEL BOOKING",
+
+    whatsapp:"https://wa.me/201032321748",
+
+    repeatHotelGap:3,
+
+    repeatCombinationGap:10
+
+};
+
+
+/* =========================================================
+   18 HOTELS
+========================================================= */
+
+const DEFAULT_HOTELS = [
+
+    {
+        id:"h1",
+        name:"أبراج الوحدة",
+        city:"مكة",
+        area:"التيسير",
+        stars:3,
+        distance:900,
+        time:7,
+        transport:"باصات الفندق 24 ساعة",
+        priceRange:"اقتصادي",
+        rooms:"غرف اقتصادية",
+        features:[
+            "قريب من الحرم",
+            "باصات مجانية 24 ساعة",
+            "موقع في حي التيسير",
+            "شارع المنصور"
+        ],
+        image:"images/abraj-alwahda.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h2",
+        name:"كدي تاور",
+        city:"مكة",
+        area:"أجياد",
+        stars:4,
+        distance:1300,
+        time:15,
+        transport:"باص مجاني 24 ساعة",
+        priceRange:"متوسط",
+        rooms:"ثنائي / ثلاثي / رباعي",
+        features:[
+            "واي فاي مجاني",
+            "مطعم",
+            "باص مجاني 24 ساعة",
+            "غرف متعددة"
+        ],
+        image:"images/kudi-tower.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h3",
+        name:"أبراج الكسوة",
+        city:"مكة",
+        area:"التيسير",
+        stars:3,
+        distance:900,
+        time:10,
+        transport:"باصات مجانية 24 ساعة",
+        priceRange:"اقتصادي",
+        rooms:"غرف عائلية",
+        features:[
+            "قريب من الحرم",
+            "باصات مجانية",
+            "مطعم",
+            "مصليات للرجال والنساء",
+            "واي فاي مجاني"
+        ],
+        image:"images/al-kiswah-towers.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h4",
+        name:"إيلاف بكة",
+        city:"مكة",
+        area:"العزيزية",
+        stars:5,
+        distance:2400,
+        time:20,
+        transport:"باصات للحرم",
+        priceRange:"فاخر",
+        rooms:"غرف وأجنحة",
+        features:[
+            "تصنيف 5 نجوم",
+            "مطاعم",
+            "واي فاي",
+            "مواقف سيارات",
+            "مصليات",
+            "باصات للحرم"
+        ],
+        image:"images/elaf-bakka.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h5",
+        name:"قصر العليان",
+        city:"مكة",
+        area:"أجياد",
+        stars:3,
+        distance:1400,
+        time:15,
+        transport:"حسب الحجز",
+        priceRange:"اقتصادي",
+        rooms:"غرف متنوعة",
+        features:[
+            "استقبال راقٍ",
+            "واي فاي",
+            "10 مصاعد",
+            "خدمة غرف 24 ساعة",
+            "نظافة ممتازة",
+            "سعر اقتصادي"
+        ],
+        image:"images/qasr-alalyan.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h6",
+        name:"فوكو",
+        city:"مكة",
+        area:"إبراهيم الخليل",
+        stars:5,
+        distance:1200,
+        time:15,
+        transport:"باص طوال اليوم",
+        priceRange:"فاخر",
+        rooms:"ثنائي / ثلاثي / رباعي",
+        features:[
+            "تصنيف 5 نجوم",
+            "حمام",
+            "شاشة",
+            "ثلاجة",
+            "تكييف",
+            "واي فاي",
+            "غلاية",
+            "باص للحرم طوال اليوم",
+            "مطعم",
+            "مصلى"
+        ],
+        image:"images/voco.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h7",
+        name:"أبراج التيسير",
+        city:"مكة",
+        area:"التيسير",
+        stars:4,
+        distance:900,
+        time:10,
+        transport:"باصات 24 ساعة",
+        priceRange:"متوسط",
+        rooms:"حتى 5 أفراد",
+        features:[
+            "900 متر تقريباً",
+            "حوالي 10 دقائق مشي",
+            "باصات 24 ساعة",
+            "إطلالات على أبراج الحرم"
+        ],
+        image:"images/abraj-altaiseer.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h8",
+        name:"نزيل المشاعر",
+        city:"مكة",
+        area:"إبراهيم الخليل",
+        stars:3,
+        distance:1000,
+        time:10,
+        transport:"حسب الحجز",
+        priceRange:"اقتصادي",
+        rooms:"غرف متنوعة",
+        features:[
+            "اقتصادي",
+            "طريق سهل",
+            "حوالي 10 دقائق",
+            "محلات على الطريق"
+        ],
+        image:"images/nazil-almashaer.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h9",
+        name:"منارات غزة",
+        city:"مكة",
+        area:"الغزة",
+        stars:4,
+        distance:400,
+        time:7,
+        transport:"حسب الحجز",
+        priceRange:"متوسط",
+        rooms:"غرف متنوعة",
+        features:[
+            "قريب من الحرم",
+            "عدد غرف كبير",
+            "مطعم",
+            "واي فاي",
+            "مصاعد"
+        ],
+        image:"images/manarat-gaza.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h10",
+        name:"مثابة",
+        city:"مكة",
+        area:"التيسير",
+        stars:4,
+        distance:900,
+        time:10,
+        transport:"حسب الحجز",
+        priceRange:"متوسط",
+        rooms:"غرف وأجنحة",
+        features:[
+            "غرف مريحة",
+            "أجنحة",
+            "واي فاي",
+            "مواقف",
+            "مطعم"
+        ],
+        image:"images/mathaba.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h11",
+        name:"فلسطين",
+        city:"مكة",
+        area:"إبراهيم الخليل",
+        stars:3,
+        distance:850,
+        time:10,
+        transport:"حسب الحجز",
+        priceRange:"اقتصادي",
+        rooms:"غرف متنوعة",
+        features:[
+            "قريب من الحرم",
+            "واي فاي",
+            "مطاعم",
+            "خدمة غرف 24 ساعة",
+            "مواقف"
+        ],
+        image:"images/palestine.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h12",
+        name:"مكارم الهجرة",
+        city:"مكة",
+        area:"المسفلة",
+        stars:3,
+        distance:1400,
+        time:15,
+        transport:"مواصلات",
+        priceRange:"اقتصادي",
+        rooms:"غرف متنوعة",
+        features:[
+            "منطقة المسفلة",
+            "مطعم",
+            "واي فاي",
+            "مواقف"
+        ],
+        image:"images/makarem-alhijra.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h13",
+        name:"صفوة البيت",
+        city:"مكة",
+        area:"العزيزية",
+        stars:3,
+        distance:2000,
+        time:20,
+        transport:"حسب الحجز",
+        priceRange:"متوسط",
+        rooms:"غرف عائلية",
+        features:[
+            "غرف عائلية",
+            "واي فاي",
+            "تكييف",
+            "ثلاجة",
+            "خدمة غرف"
+        ],
+        image:"images/safwat-albait.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h14",
+        name:"شرفة الطلائع",
+        city:"مكة",
+        area:"أجياد",
+        stars:3,
+        distance:1600,
+        time:18,
+        transport:"مواصلات",
+        priceRange:"متوسط",
+        rooms:"حتى 4 أفراد",
+        features:[
+            "غرف واسعة",
+            "مطعم",
+            "مواقف",
+            "مصاعد",
+            "مواصلات"
+        ],
+        image:"images/shorfat-al-talaea.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h15",
+        name:"ضيافة الرجاء",
+        city:"مكة",
+        area:"إبراهيم الخليل",
+        stars:3,
+        distance:800,
+        time:10,
+        transport:"باصات",
+        priceRange:"اقتصادي",
+        rooms:"غرف متنوعة",
+        features:[
+            "قريب من الحرم",
+            "حوالي 10 دقائق",
+            "289 غرفة",
+            "واي فاي",
+            "مواقف",
+            "مطعم"
+        ],
+        image:"images/diyafat-alrajaa.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h16",
+        name:"سرايا الجوار",
+        city:"مكة",
+        area:"العزيزية",
+        stars:3,
+        distance:2200,
+        time:22,
+        transport:"حسب الحجز",
+        priceRange:"اقتصادي",
+        rooms:"غرف متنوعة",
+        features:[
+            "سعر اقتصادي",
+            "موقع العزيزية",
+            "مناسب للعائلات"
+        ],
+        image:"images/saraya-aljiwar.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h17",
+        name:"العليان جراند",
+        city:"مكة",
+        area:"أجياد",
+        stars:4,
+        distance:1500,
+        time:17,
+        transport:"حسب الحجز",
+        priceRange:"متوسط",
+        rooms:"غرف متنوعة",
+        features:[
+            "منطقة أجياد",
+            "واي فاي",
+            "مناسب للعائلات"
+        ],
+        image:"images/alalyan-grand.jpg",
+        posts:0,
+        lastPost:0
+    },
+
+    {
+        id:"h18",
+        name:"أركان بكة",
+        city:"مكة",
+        area:"العزيزية",
+        stars:4,
+        distance:2000,
+        time:16,
+        transport:"باصات حسب الحجز",
+        priceRange:"متوسط",
+        rooms:"غرف عائلية",
+        features:[
+            "تصنيف 4 نجوم",
+            "مطعم",
+            "مواقف",
+            "غرف عائلية",
+            "مواصلات"
+        ],
+        image:"images/arkan-bakka.jpg",
+        posts:0,
+        lastPost:0
+    }
+
+];
+
+
+/* =========================================================
+   DEFAULT GROUPS
+========================================================= */
+
+const DEFAULT_GROUPS = [];
+
+
+/* =========================================================
+   APP STATE
+========================================================= */
+
+let state = loadState();
+
+let selectedCount = 3;
+
+let selectedMethod = "smart";
+
+let selectedHotels = [];
+
+let currentPost = "";
+
+
+/* =========================================================
+   LOAD STATE
+========================================================= */
+
+function loadState(){
+
+    try{
+
+        const raw =
+            localStorage.getItem(STORAGE_KEY);
+
+        if(!raw){
+
+            return {
+
+                settings:{
+                    ...DEFAULT_SETTINGS
+                },
+
+                hotels:
+                    JSON.parse(
+                        JSON.stringify(DEFAULT_HOTELS)
+                    ),
+
+                groups:
+                    [],
+
+                history:
+                    []
+
+            };
+
+        }
+
+        const data =
+            JSON.parse(raw);
+
+        return {
+
+            settings:{
+                ...DEFAULT_SETTINGS,
+                ...(data.settings || {})
+            },
+
+            hotels:
+                Array.isArray(data.hotels)
+                ? data.hotels
+                : JSON.parse(
+                    JSON.stringify(DEFAULT_HOTELS)
+                ),
+
+            groups:
+                Array.isArray(data.groups)
+                ? data.groups
+                : [],
+
+            history:
+                Array.isArray(data.history)
+                ? data.history
+                : []
+
+        };
+
+    }catch(e){
+
+        return {
+
+            settings:{
+                ...DEFAULT_SETTINGS
+            },
+
+            hotels:
+                JSON.parse(
+                    JSON.stringify(DEFAULT_HOTELS)
+                ),
+
+            groups:[],
+
+            history:[]
+
+        };
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE STATE
+========================================================= */
+
+function saveState(){
+
+    localStorage.setItem(
+
+        STORAGE_KEY,
+
+        JSON.stringify(state)
+
+    );
+
+    updateStats();
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(message){
+
+    const el =
+        document.getElementById("toast");
+
+    el.textContent =
+        message;
+
+    el.classList.add("show");
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer =
+        setTimeout(()=>{
+
+            el.classList.remove("show");
+
+        },2500);
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function go(page){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(el=>{
+            el.classList.remove("active");
+        });
+
+    const target =
+        document.getElementById(
+            "page-" + page
+        );
+
+    if(target){
+
+        target.classList.add("active");
+
+    }
+
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(btn=>{
+
+            btn.classList.toggle(
+                "active",
+                btn.dataset.page === page
+            );
+
+        });
+
+
+    if(page === "hotels")
+        renderHotels();
+
+    if(page === "groups")
+        renderGroups();
+
+    if(page === "history")
+        renderHistory();
+
+    if(page === "settings")
+        loadSettingsForm();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+    document.getElementById("statHotels")
+        .textContent =
+        state.hotels.length;
+
+    document.getElementById("statGroups")
+        .textContent =
+        state.groups.length;
+
+    document.getElementById("statPosts")
+        .textContent =
+        state.history.length;
+
+    const used =
+        state.hotels.filter(
+            h => Number(h.posts || 0) > 0
+        ).length;
+
+    document.getElementById("statUsed")
+        .textContent =
+        used;
+
+}
+
+
+/* =========================================================
+   POST COUNT
+========================================================= */
+
+function setCount(count){
+
+    selectedCount =
+        count;
+
+    document
+        .querySelectorAll(
+            ".select-mode[data-count]"
+        )
+        .forEach(el=>{
+
+            el.classList.toggle(
+                "active",
+                Number(el.dataset.count) === count
+            );
+
+        });
+
+    generateHotels();
+
+}
+
+
+/* =========================================================
+   POST METHOD
+========================================================= */
+
+function setMethod(method){
+
+    selectedMethod =
+        method;
+
+    document
+        .querySelectorAll(
+            ".select-mode[data-method]"
+        )
+        .forEach(el=>{
+
+            el.classList.toggle(
+                "active",
+                el.dataset.method === method
+            );
+
+        });
+
+    generateHotels();
+
+}
+
+
+/* =========================================================
+   HOTEL SCORE
+========================================================= */
+
+function hotelScore(h){
+
+    const usage =
+        Number(h.posts || 0);
+
+    const recentPenalty =
+        Date.now() -
+        Number(h.lastPost || 0)
+        <
+        state.settings.repeatHotelGap *
+        86400000
+        ? 100
+        : 0;
+
+    return (
+        usage * 10 +
+        recentPenalty +
+        h.distance / 500 -
+        h.stars * 3
+    );
+
+}
+
+
+/* =========================================================
+   RANDOM SHUFFLE
+========================================================= */
+
+function shuffle(array){
+
+    const a =
+        [...array];
+
+    for(
+        let i=a.length-1;
+        i>0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random()*(i+1)
+            );
+
+        [
+            a[i],
+            a[j]
+        ] =
+        [
+            a[j],
+            a[i]
+        ];
+
+    }
+
+    return a;
+
+}
+
+
+/* =========================================================
+   GENERATE HOTELS
+========================================================= */
+
+function generateHotels(){
+
+    let hotels =
+        [...state.hotels];
+
+
+    if(selectedMethod === "smart"){
+
+        hotels.sort(
+            (a,b)=>
+                hotelScore(a) -
+                hotelScore(b)
+        );
+
+        hotels =
+            shuffle(
+                hotels.slice(
+                    0,
+                    Math.min(
+                        hotels.length,
+                        selectedCount * 3
+                    )
+                )
+            );
+
+    }
+
+
+    else if(selectedMethod === "similar"){
+
+        hotels.sort(
+            (a,b)=>{
+
+                const sa =
+                    a.stars * 10 +
+                    (a.priceRange === "اقتصادي" ? 1 :
+                     a.priceRange === "متوسط" ? 2 : 3);
+
+                const sb =
+                    b.stars * 10 +
+                    (b.priceRange === "اقتصادي" ? 1 :
+                     b.priceRange === "متوسط" ? 2 : 3);
+
+                return sa-sb;
+
+            }
+        );
+
+    }
+
+
+    else if(selectedMethod === "price"){
+
+        const order = {
+
+            "اقتصادي":1,
+
+            "متوسط":2,
+
+            "فاخر":3
+
+        };
+
+        hotels.sort(
+            (a,b)=>
+                order[a.priceRange] -
+                order[b.priceRange]
+        );
+
+    }
+
+
+    else if(selectedMethod === "near"){
+
+        hotels.sort(
+            (a,b)=>
+                a.distance -
+                b.distance
+        );
+
+    }
+
+
+    else if(selectedMethod === "stars"){
+
+        hotels.sort(
+            (a,b)=>
+                b.stars -
+                a.stars
+        );
+
+    }
+
+
+    else{
+
+        hotels =
+            shuffle(hotels);
+
+    }
+
+
+    if(
+        selectedMethod === "smart"
+        ||
+        selectedMethod === "single"
+    ){
+
+        hotels =
+            shuffle(hotels);
+
+    }
+
+
+    selectedHotels =
+        hotels.slice(
+            0,
+            Math.min(
+                selectedCount,
+                hotels.length
+            )
+        );
+
+
+    renderSelectedHotels();
+
+}
+
+
+/* =========================================================
+   RENDER SELECTED
+========================================================= */
+
+function renderSelectedHotels(){
+
+    const box =
+        document.getElementById(
+            "selectedHotels"
+        );
+
+    if(!selectedHotels.length){
+
+        box.innerHTML =
+            "<div style='color:#777'>لم يتم اختيار فنادق بعد</div>";
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        selectedHotels
+        .map(h=>`
+
+            <div class="selected-item">
+
+                <img
+                    src="${h.image}"
+                    alt="${h.name}"
+                    loading="lazy"
+                    onerror="this.src='';this.style.background='#ddd'"
+                >
+
+                <div>
+
+                    <strong>
+                        ${h.name}
+                    </strong>
+
+                    <div style="font-size:11px;color:#777">
+                        ${"⭐".repeat(h.stars)}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `)
+        .join("");
+
+}
+
+
+/* =========================================================
+   CLEAR SELECTED
+========================================================= */
+
+function clearSelected(){
+
+    selectedHotels=[];
+
+    currentPost="";
+
+    document
+        .getElementById("selectedHotels")
+        .innerHTML="";
+
+    document
+        .getElementById("postResultCard")
+        .classList.add("hidden");
+
+}
+
+
+/* =========================================================
+   STARS
+========================================================= */
+
+function stars(n){
+
+    return "⭐".repeat(
+        Number(n || 0)
+    );
+
+}
+
+
+/* =========================================================
+   CREATE POST
+========================================================= */
+
+function createPost(){
+
+    if(!selectedHotels.length){
+
+        toast(
+            "اختر الفنادق أولاً"
+        );
+
+        generateHotels();
+
+        return;
+
+    }
+
+
+    const template =
+        document.getElementById(
+            "template"
+        ).value;
+
+
+    const title =
+        document.getElementById(
+            "postTitle"
+        ).value.trim();
+
+
+    const extra =
+        document.getElementById(
+            "extraText"
+        ).value.trim();
+
+
+    let text="";
+
+
+    if(template === "short"){
+
+        text =
+`${title || "🏨 عروض فنادق مكة"}
+
+${selectedHotels.map(
+    h =>
+`🏨 ${h.name}
+${stars(h.stars)}
+📍 ${h.area}
+🕋 حوالي ${h.distance} متر
+🚌 ${h.transport}`
+).join("\n\n")}
+
+${extra ? extra+"\n\n" : ""}
+📞 للحجز والاستفسار: ${state.settings.phone}
+📲 واتساب: ${state.settings.whatsapp}
+
+${state.settings.brand}
+${state.settings.name}`;
+
+    }
+
+
+    else if(template === "groups"){
+
+        text =
+`📢 ${title || "🏨 عروض فنادق مكة"}
+
+━━━━━━━━━━━━━━
+
+${selectedHotels.map(
+    h =>
+`🏨 ${h.name}
+⭐ التصنيف: ${stars(h.stars)}
+📍 الموقع: ${h.area}
+🕋 المسافة: حوالي ${h.distance} متر
+⏱️ الوقت التقريبي: ${h.time} دقيقة
+🚌 المواصلات: ${h.transport}
+💰 الفئة: ${h.priceRange}
+
+✨ المميزات:
+${h.features.map(x=>"• "+x).join("\n")}`
+).join("\n\n━━━━━━━━━━━━━━\n\n")}
+
+${extra ? "\n"+extra+"\n" : ""}
+
+📞 للحجز والاستفسار
+${state.settings.phone}
+
+📲 واتساب:
+${state.settings.whatsapp}
+
+🏨 ${state.settings.brand}
+👤 ${state.settings.name}`;
+
+    }
+
+
+    else{
+
+        text =
+`✨ ${title || "🏨 عروض فنادق مكة المكرمة"}
+
+━━━━━━━━━━━━━━━━
+
+${selectedHotels.map(
+    h =>
+`🏨 ${h.name}
+${stars(h.stars)}
+
+📍 ${h.area}
+🕋 حوالي ${h.distance} متر
+⏱️ ${h.time} دقيقة تقريباً
+🚌 ${h.transport}
+💰 ${h.priceRange}
+
+✨ ${h.features.slice(0,5).join(" • ")}`
+).join("\n\n━━━━━━━━━━━━━━━━\n\n")}
+
+${extra ? "\n\n💬 "+extra : ""}
+
+━━━━━━━━━━━━━━━━
+
+📞 للحجز والاستفسار:
+${state.settings.phone}
+
+📲 واتساب:
+${state.settings.whatsapp}
+
+🏨 ${state.settings.brand}
+👤 ${state.settings.name}
+
+✨ للحجز والاستفسار راسلنا على واتساب`;
+
+    }
+
+
+    currentPost =
+        text;
+
+
+    document
+        .getElementById("postResult")
+        .textContent =
+        text;
+
+
+    document
+        .getElementById("postResultCard")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("postResultCard")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* =========================================================
+   COPY POST
+========================================================= */
+
+async function copyPost(){
+
+    if(!currentPost){
+
+        toast("لا يوجد إعلان للنسخ");
+
+        return;
+
+    }
+
+
+    try{
+
+        await navigator.clipboard.writeText(
+            currentPost
+        );
+
+        toast(
+            "تم نسخ الإعلان ✅"
+        );
+
+    }catch(e){
+
+        const area =
+            document.createElement("textarea");
+
+        area.value =
+            currentPost;
+
+        document.body.appendChild(area);
+
+        area.select();
+
+        document.execCommand("copy");
+
+        area.remove();
+
+        toast(
+            "تم نسخ الإعلان ✅"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE POST
+========================================================= */
+
+function savePost(){
+
+    if(!currentPost){
+
+        toast("أنشئ الإعلان أولاً");
+
+        return;
+
+    }
+
+
+    const now =
+        new Date();
+
+
+    const item={
+
+        id:
+            Date.now(),
+
+        date:
+            now.toISOString(),
+
+        hotels:
+            selectedHotels.map(
+                h=>h.id
+            ),
+
+        hotelNames:
+            selectedHotels.map(
+                h=>h.name
+            ),
+
+        method:
+            selectedMethod,
+
+        count:
+            selectedHotels.length,
+
+        text:
+            currentPost
+
+    };
+
+
+    state.history.unshift(
+        item
+    );
+
+
+    selectedHotels.forEach(
+        selected=>{
+
+            const hotel =
+                state.hotels.find(
+                    h=>h.id === selected.id
+                );
+
+            if(hotel){
+
+                hotel.posts =
+                    Number(hotel.posts || 0) + 1;
+
+                hotel.lastPost =
+                    Date.now();
+
+            }
+
+        }
+    );
+
+
+    saveState();
+
+    toast(
+        "تم حفظ الإعلان في السجل ✅"
+    );
+
+}
+
+
+/* =========================================================
+   RENDER HOTELS
+========================================================= */
+
+function renderHotels(){
+
+    const grid =
+        document.getElementById(
+            "hotelGrid"
+        );
+
+
+    if(!grid)
+        return;
+
+
+    const search =
+        (
+            document.getElementById(
+                "hotelSearch"
+            )?.value || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const starsFilter =
+        document.getElementById(
+            "starFilter"
+        )?.value || "all";
+
+
+    const areaFilter =
+        document.getElementById(
+            "areaFilter"
+        )?.value || "all";
+
+
+    const sort =
+        document.getElementById(
+            "sortHotels"
+        )?.value || "default";
+
+
+    let list =
+        state.hotels.filter(
+            h=>{
+
+                const matchSearch =
+                    !search ||
+                    h.name.toLowerCase().includes(search);
+
+
+                const matchStars =
+                    starsFilter === "all" ||
+                    String(h.stars) === starsFilter;
+
+
+                const matchArea =
+                    areaFilter === "all" ||
+                    h.area.includes(areaFilter);
+
+
+                return (
+                    matchSearch &&
+                    matchStars &&
+                    matchArea
+                );
+
+            }
+        );
+
+
+    if(sort === "distance"){
+
+        list.sort(
+            (a,b)=>
+                a.distance-b.distance
+        );
+
+    }
+
+    else if(sort === "stars"){
+
+        list.sort(
+            (a,b)=>
+                b.stars-a.stars
+        );
+
+    }
+
+    else if(sort === "used"){
+
+        list.sort(
+            (a,b)=>
+                Number(a.posts||0) -
+                Number(b.posts||0)
+        );
+
+    }
+
+
+    grid.innerHTML =
+        list.map(
+            h=>`
+
+            <article
+                class="hotel-card"
+            >
+
+                <img
+                    class="hotel-image"
+                    src="${h.image}"
+                    alt="${h.name}"
+                    loading="lazy"
+                    onerror="
+                        this.style.opacity='.2';
+                    "
+                >
+
+                <div class="hotel-body">
+
+                    <div class="hotel-name">
+                        ${h.name}
+                    </div>
+
+
+                    <div class="hotel-meta">
+
+                        <span class="badge red">
+                            ${stars(h.stars)}
+                        </span>
+
+                        <span class="badge">
+                            📍 ${h.area}
+                        </span>
+
+                        <span class="badge">
+                            🕋 ${h.distance}م
+                        </span>
+
+                        <span class="badge gold">
+                            ${h.priceRange}
+                        </span>
+
+                    </div>
+
+
+                    <div class="hotel-features">
+
+                        ${h.features
+                            .slice(0,4)
+                            .map(
+                                x=>"• "+x
+                            )
+                            .join("<br>")
+                        }
+
+                    </div>
+
+
+                    <div
+                        style="
+                        margin-top:8px;
+                        font-size:11px;
+                        color:#777
+                        "
+                    >
+                        تم استخدامه:
+                        ${h.posts || 0}
+                        مرة
+                    </div>
+
+
+                    <div class="hotel-actions">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="showHotel('${h.id}')"
+                        >
+                            التفاصيل
+                        </button>
+
+                        <button
+                            class="btn btn-light"
+                            onclick="selectOneHotel('${h.id}')"
+                        >
+                            اختيار
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            `
+        )
+        .join("");
+
+
+    if(!list.length){
+
+        grid.innerHTML =
+            `
+            <div
+                style="
+                grid-column:1/-1;
+                text-align:center;
+                padding:30px;
+                color:#777;
+                "
+            >
+                لا توجد نتائج
+            </div>
+            `;
+
+    }
+
+}
+
+
+/* =========================================================
+   SELECT ONE HOTEL
+========================================================= */
+
+function selectOneHotel(id){
+
+    const hotel =
+        state.hotels.find(
+            h=>h.id===id
+        );
+
+    if(!hotel)
+        return;
+
+
+    selectedHotels=[
+        hotel
+    ];
+
+    selectedCount=1;
+
+
+    document
+        .querySelectorAll(
+            ".select-mode[data-count]"
+        )
+        .forEach(el=>{
+
+            el.classList.toggle(
+                "active",
+                Number(el.dataset.count)===1
+            );
+
+        });
+
+
+    renderSelectedHotels();
+
+    go("post");
+
+    toast(
+        `تم اختيار ${hotel.name}`
+    );
+
+}
+
+
+/* =========================================================
+   HOTEL MODAL
+========================================================= */
+
+function showHotel(id){
+
+    const h =
+        state.hotels.find(
+            x=>x.id===id
+        );
+
+
+    if(!h)
+        return;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        h.name;
+
+
+    document.getElementById(
+        "modalContent"
+    ).innerHTML = `
+
+        <img
+            src="${h.image}"
+            alt="${h.name}"
+            style="
+            width:100%;
+            max-height:330px;
+            object-fit:cover;
+            border-radius:14px;
+            "
+        >
+
+        <div style="margin-top:15px">
+
+            <h3>
+                ${h.name}
+            </h3>
+
+            <p>
+                ⭐ ${stars(h.stars)}
+            </p>
+
+            <p>
+                📍 المنطقة:
+                ${h.area}
+            </p>
+
+            <p>
+                🕋 المسافة التقريبية:
+                ${h.distance} متر
+            </p>
+
+            <p>
+                ⏱️ الوقت التقريبي:
+                ${h.time} دقيقة
+            </p>
+
+            <p>
+                🚌 المواصلات:
+                ${h.transport}
+            </p>
+
+            <p>
+                💰 الفئة:
+                ${h.priceRange}
+            </p>
+
+            <p>
+                🛏️ الغرف:
+                ${h.rooms}
+            </p>
+
+            <h4>
+                المميزات
+            </h4>
+
+            <ul>
+
+                ${h.features
+                    .map(
+                        x=>`<li>${x}</li>`
+                    )
+                    .join("")
+                }
+
+            </ul>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeModal(event){
+
+    if(
+        event &&
+        event.target !==
+        document.getElementById("modal")
+    ){
+
+        return;
+
+    }
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   GROUPS
+========================================================= */
+
+function addGroup(){
+
+    const name =
+        document
+        .getElementById("groupName")
+        .value
+        .trim();
+
+
+    const url =
+        document
+        .getElementById("groupUrl")
+        .value
+        .trim();
+
+
+    if(!name || !url){
+
+        toast(
+            "اكتب اسم الجروب والرابط"
+        );
+
+        return;
+
+    }
+
+
+    state.groups.push({
+
+        id:
+            Date.now(),
+
+        name,
+
+        url,
+
+        posts:0,
+
+        createdAt:
+            new Date().toISOString()
+
+    });
+
+
+    saveState();
+
+
+    document
+        .getElementById("groupName")
+        .value="";
+
+
+    document
+        .getElementById("groupUrl")
+        .value="";
+
+
+    renderGroups();
+
+
+    toast(
+        "تمت إضافة الجروب ✅"
+    );
+
+}
+
+
+/* =========================================================
+   RENDER GROUPS
+========================================================= */
+
+function renderGroups(){
+
+    const grid =
+        document.getElementById(
+            "groupGrid"
+        );
+
+
+    if(!grid)
+        return;
+
+
+    if(!state.groups.length){
+
+        grid.innerHTML = `
+
+            <div
+                class="card"
+                style="
+                grid-column:1/-1;
+                text-align:center;
+                color:#777;
+                "
+            >
+
+                لم تضف أي جروبات حتى الآن.
+
+                <br><br>
+
+                أضف رابط الجروب من الأعلى
+                ليظهر هنا.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        state.groups
+        .map(
+            g=>`
+
+            <div
+                class="group-card"
+            >
+
+                <h3>
+                    👥 ${escapeHtml(g.name)}
+                </h3>
+
+                <div class="group-url">
+                    ${escapeHtml(g.url)}
+                </div>
+
+                <div
+                    style="
+                    font-size:11px;
+                    color:#777;
+                    margin-top:8px;
+                    "
+                >
+                    المنشورات:
+                    ${g.posts || 0}
+                </div>
+
+
+                <div class="btn-row">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="openGroup('${g.id}')"
+                    >
+                        فتح الجروب
+                    </button>
+
+                    <button
+                        class="btn btn-green"
+                        onclick="copyPostForGroup('${g.id}')"
+                    >
+                        نسخ + فتح
+                    </button>
+
+                    <button
+                        class="btn btn-danger"
+                        onclick="deleteGroup('${g.id}')"
+                    >
+                        حذف
+                    </button>
+
+                </div>
+
+            </div>
+
+            `
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   OPEN GROUP
+========================================================= */
+
+function openGroup(id){
+
+    const group =
+        state.groups.find(
+            g=>String(g.id)===String(id)
+        );
+
+
+    if(!group)
+        return;
+
+
+    group.posts =
+        Number(group.posts||0)+1;
+
+
+    saveState();
+
+
+    window.open(
+        group.url,
+        "_blank"
+    );
+
+}
+
+
+/* =========================================================
+   COPY POST FOR GROUP
+========================================================= */
+
+async function copyPostForGroup(id){
+
+    if(!currentPost){
+
+        toast(
+            "أنشئ إعلاناً أولاً من صفحة إنشاء منشور"
+        );
+
+        go("post");
+
+        return;
+
+    }
+
+
+    await copyPost();
+
+    const group =
+        state.groups.find(
+            g=>String(g.id)===String(id)
+        );
+
+
+    if(group){
+
+        group.posts =
+            Number(group.posts||0)+1;
+
+        saveState();
+
+        window.open(
+            group.url,
+            "_blank"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DELETE GROUP
+========================================================= */
+
+function deleteGroup(id){
+
+    if(
+        !confirm(
+            "هل تريد حذف هذا الجروب؟"
+        )
+    )
+        return;
+
+
+    state.groups =
+        state.groups.filter(
+            g=>String(g.id)!==String(id)
+        );
+
+
+    saveState();
+
+    renderGroups();
+
+    toast(
+        "تم حذف الجروب"
+    );
+
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+function renderHistory(){
+
+    const list =
+        document.getElementById(
+            "historyList"
+        );
+
+
+    if(!list)
+        return;
+
+
+    if(!state.history.length){
+
+        list.innerHTML = `
+
+            <div class="card">
+
+                <div
+                    style="
+                    text-align:center;
+                    color:#777;
+                    "
+                >
+                    لا يوجد منشورات محفوظة حتى الآن.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        state.history
+        .map(
+            item=>{
+
+                const date =
+                    new Date(
+                        item.date
+                    );
+
+
+                return `
+
+                <div
+                    class="history-item"
+                >
+
+                    <div
+                        class="history-head"
+                    >
+
+                        <strong>
+                            ${escapeHtml(
+                                item.hotelNames.join(" + ")
+                            )}
+                        </strong>
+
+                        <span
+                            class="history-date"
+                        >
+                            ${date.toLocaleString("ar-EG")}
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="history-preview"
+                    >
+                        ${escapeHtml(
+                            item.text
+                        )}
+                    </div>
+
+
+                    <div class="btn-row">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="reuseHistory('${item.id}')"
+                        >
+                            🔄 استخدام مرة أخرى
+                        </button>
+
+                        <button
+                            class="btn btn-danger"
+                            onclick="deleteHistory('${item.id}')"
+                        >
+                            حذف
+                        </button>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   REUSE HISTORY
+========================================================= */
+
+function reuseHistory(id){
+
+    const item =
+        state.history.find(
+            x=>String(x.id)===String(id)
+        );
+
+
+    if(!item)
+        return;
+
+
+    selectedHotels =
+        item.hotels
+        .map(
+            hotelId =>
+                state.hotels.find(
+                    h=>h.id===hotelId
+                )
+        )
+        .filter(Boolean);
+
+
+    selectedCount =
+        selectedHotels.length;
+
+
+    selectedMethod =
+        item.method ||
+        "smart";
+
+
+    currentPost =
+        item.text;
+
+
+    renderSelectedHotels();
+
+
+    document.getElementById(
+        "postResult"
+    ).textContent =
+        currentPost;
+
+
+    document.getElementById(
+        "postResultCard"
+    ).classList.remove(
+        "hidden"
+    );
+
+
+    go("post");
+
+}
+
+
+/* =========================================================
+   DELETE HISTORY
+========================================================= */
+
+function deleteHistory(id){
+
+    state.history =
+        state.history.filter(
+            x=>String(x.id)!==String(id)
+        );
+
+
+    saveState();
+
+    renderHistory();
+
+    toast(
+        "تم حذف المنشور"
+    );
+
+}
+
+
+/* =========================================================
+   CLEAR HISTORY
+========================================================= */
+
+function clearHistory(){
+
+    if(
+        !confirm(
+            "سيتم حذف سجل المنشورات بالكامل. هل أنت متأكد؟"
+        )
+    )
+        return;
+
+
+    state.history=[];
+
+    saveState();
+
+    renderHistory();
+
+    toast(
+        "تم مسح السجل"
+    );
+
+}
+
+
+/* =========================================================
+   SETTINGS FORM
+========================================================= */
+
+function loadSettingsForm(){
+
+    document.getElementById(
+        "setName"
+    ).value =
+        state.settings.name;
+
+
+    document.getElementById(
+        "setPhone"
+    ).value =
+        state.settings.phone;
+
+
+    document.getElementById(
+        "setBrand"
+    ).value =
+        state.settings.brand;
+
+
+    document.getElementById(
+        "setWhatsapp"
+    ).value =
+        state.settings.whatsapp;
+
+
+    document.getElementById(
+        "setRepeat"
+    ).value =
+        state.settings.repeatHotelGap;
+
+}
+
+
+/* =========================================================
+   SAVE SETTINGS
+========================================================= */
+
+function saveSettings(){
+
+    state.settings.name =
+        document.getElementById(
+            "setName"
+        ).value.trim();
+
+
+    state.settings.phone =
+        document.getElementById(
+            "setPhone"
+        ).value.trim();
+
+
+    state.settings.brand =
+        document.getElementById(
+            "setBrand"
+        ).value.trim();
+
+
+    state.settings.whatsapp =
+        document.getElementById(
+            "setWhatsapp"
+        ).value.trim();
+
+
+    state.settings.repeatHotelGap =
+        Number(
+            document.getElementById(
+                "setRepeat"
+            ).value
+        ) || 0;
+
+
+    saveState();
+
+
+    toast(
+        "تم حفظ الإعدادات ✅"
+    );
+
+}
+
+
+/* =========================================================
+   BACKUP
+========================================================= */
+
+function backupData(){
+
+    const data =
+        JSON.stringify(
+            state,
+            null,
+            2
+        );
+
+
+    const blob =
+        new Blob(
+            [data],
+            {
+                type:"application/json"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const a =
+        document.createElement("a");
+
+
+    a.href =
+        url;
+
+
+    a.download =
+        "nusuk-hotel-booking-backup.json";
+
+
+    a.click();
+
+
+    URL.revokeObjectURL(url);
+
+
+    toast(
+        "تم إنشاء النسخة الاحتياطية"
+    );
+
+}
+
+
+/* =========================================================
+   RESTORE
+========================================================= */
+
+function restoreData(event){
+
+    const file =
+        event.target.files[0];
+
+
+    if(!file)
+        return;
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(){
+
+            try{
+
+                const data =
+                    JSON.parse(
+                        reader.result
+                    );
+
+
+                if(
+                    !data.hotels ||
+                    !Array.isArray(data.hotels)
+                ){
+
+                    throw new Error(
+                        "Invalid backup"
+                    );
+
+                }
+
+
+                state={
+
+                    settings:{
+                        ...DEFAULT_SETTINGS,
+                        ...(data.settings || {})
+                    },
+
+                    hotels:
+                        data.hotels,
+
+                    groups:
+                        data.groups || [],
+
+                    history:
+                        data.history || []
+
+                };
+
+
+                saveState();
+
+
+                renderHotels();
+
+                renderGroups();
+
+                renderHistory();
+
+                updateStats();
+
+
+                toast(
+                    "تم استرجاع النسخة الاحتياطية ✅"
+                );
+
+            }catch(e){
+
+                toast(
+                    "ملف النسخة الاحتياطية غير صالح"
+                );
+
+            }
+
+        };
+
+
+    reader.readAsText(file);
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetSystem(){
+
+    if(
+        !confirm(
+            "سيتم حذف بياناتك المحلية وإرجاع النظام للوضع الافتراضي. هل أنت متأكد؟"
+        )
+    )
+        return;
+
+
+    localStorage.removeItem(
+        STORAGE_KEY
+    );
+
+
+    location.reload();
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(text){
+
+    return String(text)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+function init(){
+
+    updateStats();
+
+    renderHotels();
+
+    renderGroups();
+
+    renderHistory();
+
+    loadSettingsForm();
+
+    setCount(3);
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+init();
+
+</script>
+
+</body>
+</html>
